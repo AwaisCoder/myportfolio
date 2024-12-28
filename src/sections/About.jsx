@@ -1,13 +1,36 @@
-import { useState } from 'react';
-import Globe from 'react-globe.gl';
-
-import Button from '../components/Button.jsx';
+import { useState, useEffect } from 'react';
+import { ThemeSwitch } from '../components/ThemeSwitch';
+import { FaMoon, FaSun } from 'react-icons/fa';
 
 const About = () => {
   const [hasCopied, setHasCopied] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.body.classList.add('light');
+      document.body.classList.remove('dark');
+    } else {
+      document.body.classList.add('dark');
+      document.body.classList.remove('light');
+    }
+  }, [isDarkMode]);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000); // Update every second
+
+    return () => clearInterval(intervalId); // Cleanup on unmount
+  }, []);
+
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+  };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(' adrian@jsmastery.pro');
+    navigator.clipboard.writeText('awaisc004@gmail.com');
     setHasCopied(true);
 
     setTimeout(() => {
@@ -15,93 +38,151 @@ const About = () => {
     }, 2000);
   };
 
+  const formatDate = (date) => {
+    const options = { weekday: 'long', month: 'short', day: 'numeric' };
+    return date.toLocaleDateString(undefined, options);
+  };
+
+  const formatTime = (date) => {
+    return date.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
+  };
+
+  const localTimeOffset = '+5:30 GMT'; // Replace with your actual offset
+
   return (
     <section className="c-space my-20" id="about">
-      <div className="grid xl:grid-cols-3 xl:grid-rows-6 md:grid-cols-2 grid-cols-1 gap-5 h-full">
-        <div className="col-span-1 xl:row-span-3">
-          <div className="grid-container">
-            <img src="assets/grid1.png" alt="grid-1" className="w-full sm:h-[276px] h-fit object-contain" />
+      <div className="grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 h-full grid-rows-[auto,auto,auto,auto,auto]">
 
+
+        {/* Large Introduction Card */}
+        <div className="xl:col-span-2 md:col-span-1 col-span-1 xl:row-span-2 md:row-span-2 row-span-1">
+          <div className="grid-container">
+            <img src="assets/boy.png" alt="Awais Chaudhary" className="w-full sm:h-[276px] h-fit object-contain" />
             <div>
-              <p className="grid-headtext">Hi, I’m Adrian Hajdin</p>
+              <p className="grid-headtext">Hi, I'm Awais Chaudhary</p>
               <p className="grid-subtext">
-                With 12 years of experience, I have honed my skills in both frontend and backend dev, creating dynamic
-                and responsive websites.
+                I’m a web developer fluent in the MERN stack, JavaScript, TypeScript, and TailwindCSS. I thrive on crafting creative and impactful web solutions that not only look good but work like a charm. I’m all about teamwork and innovation—because tackling meaningful challenges is just more fun when you’ve got a great squad by your side. Whether it’s debugging a tricky line of code or building something entirely new, I’m always up for the adventure.<br /><br />
+                But enough about me! Scroll down and look at my projects—they’re the real stars of the show!
               </p>
             </div>
           </div>
         </div>
 
-        <div className="col-span-1 xl:row-span-3">
+        {/* Tech Stack Card */}
+        <div className="xl:col-span-1 md:col-span-1 col-span-1 xl:row-span-1 md:row-span-1 row-span-1">
           <div className="grid-container">
-            <img src="assets/grid2.png" alt="grid-2" className="w-full sm:h-[276px] h-fit object-contain" />
-
+            <img src="assets/grid2.png" alt="Tech Stack" className="w-full sm:h-[276px] h-fit object-contain" />
             <div>
               <p className="grid-headtext">Tech Stack</p>
               <p className="grid-subtext">
-                I specialize in a variety of languages, frameworks, and tools that allow me to build robust and scalable
-                applications
+                I have experience with a variety of languages, frameworks, and tools that allow me to build robust and scalable applications.
               </p>
             </div>
           </div>
         </div>
 
-        <div className="col-span-1 xl:row-span-4">
-          <div className="grid-container">
-            <div className="rounded-3xl w-full sm:h-[326px] h-fit flex justify-center items-center">
-              <Globe
-                height={326}
-                width={326}
-                backgroundColor="rgba(0, 0, 0, 0)"
-                backgroundImageOpacity={0.5}
-                showAtmosphere
-                showGraticules
-                globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
-                bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
-                labelsData={[{ lat: 40, lng: -100, text: 'Rjieka, Croatia', color: 'white', size: 15 }]}
+        {/* Time Display */}
+        <div className="xl:col-span-1 md:col-span-1 col-span-1 xl:row-span-3 md:row-span-1 row-span-1">
+          <div className="grid-container flex items-center justify-center h-full">
+            <div className="relative w-full h-full max-w-[500px] max-h-[500px]">
+              <img
+                src="assets/iphone.png"
+                alt="iPhone Lockscreen"
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{
+                  top: '27px',
+                  maskImage: 'linear-gradient(to right, transparent 1%, black 13%, transparent 100%)',
+                  WebkitMaskImage: 'linear-gradient(to right, transparent 1%, black 50%, transparent 100%)', // For Safari
+                }}
               />
-            </div>
-            <div>
-              <p className="grid-headtext">I’m very flexible with time zone communications & locations</p>
-              <p className="grid-subtext">I&apos;m based in Rjieka, Croatia and open to remote work worldwide.</p>
-              <Button name="Contact Me" isBeam containerClass="w-full mt-10" />
-            </div>
-          </div>
-        </div>
-
-        <div className="xl:col-span-2 xl:row-span-3">
-          <div className="grid-container">
-            <img src="assets/grid3.png" alt="grid-3" className="w-full sm:h-[266px] h-fit object-contain" />
-
-            <div>
-              <p className="grid-headtext">My Passion for Coding</p>
-              <p className="grid-subtext">
-                I love solving problems and building things through code. Programming isn&apos;t just my
-                profession—it&apos;s my passion. I enjoy exploring new technologies, and enhancing my skills.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="xl:col-span-1 xl:row-span-2">
-          <div className="grid-container">
-            <img
-              src="assets/grid4.png"
-              alt="grid-4"
-              className="w-full md:h-[126px] sm:h-[276px] h-fit object-cover sm:object-top"
-            />
-
-            <div className="space-y-2">
-              <p className="grid-subtext text-center">Contact me</p>
-              <div className="copy-container" onClick={handleCopy}>
-                <img src={hasCopied ? 'assets/tick.svg' : 'assets/copy.svg'} alt="copy" />
-                <p className="lg:text-2xl md:text-xl font-medium text-gray_gradient text-white">adrian@jsmastery.pro</p>
+              <div
+                className="absolute inset-0 flex flex-col items-center justify-center text-[#C0C0C0] text-center"
+                style={{ paddingTop: '85px' }} // Adjust padding as needed
+              >
+                <p className="text-sm" style={{ fontFamily: 'SF Pro' }}>{formatDate(currentTime)}</p>
+                <p className="text-5xl font-bold" style={{ fontFamily: 'SF Pro Rounded' }}>{formatTime(currentTime)}</p>
+                <p className="text-sm" style={{ fontFamily: 'SF Pro' }}>{localTimeOffset}</p>
+                <img
+                  src="assets/Widgets.png" // Replace with the correct path to your widgets PNG
+                  alt="iOS Widgets"
+                  className="w-[170px] h-auto mt-4" // Adjust size and spacing as needed
+                />
               </div>
             </div>
           </div>
         </div>
+
+        {/* Passion for Creation Card */}
+        <div className="xl:col-span-1 md:col-span-1 col-span-1 xl:row-span-1 md:row-span-1 row-span-1">
+          <div className="grid-container p-6 flex flex-col items-start text-start">
+            <h3 className="grid-headtext text-lg font-semibold mb-2"> Driven by Innovation</h3>
+            <p className="grid-subtext text-sm text-gray-700 dark:text-gray-300 mb-4">
+              I'm passionate about building, no matter if it's from scratch or based on an inspiration. I love to build, to craft, and to see ideas take shape. Once I start, I'm all in until it's done.
+            </p>
+          </div>
+        </div>
+
+        {/* Contact Card */}
+        <div className="xl:col-span-1 md:col-span-1 col-span-1 xl:row-span-2 md:row-span-1 row-span-1">
+          <div className="grid-container">
+            <div className="space-y-6 mt-4">
+              <p className="grid-headtext text-xl">Have a project in mind?</p>
+              <p className="grid-subtext">Find me on</p>
+
+              <div className="grid grid-cols-2 gap-4 mt-4">
+                {/* LinkedIn */}
+                <a href="https://www.linkedin.com/in/awais-chaudhary-1484a0243/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center space-x-2 w-auto">
+                  <img src="/assets/linkedin.png" alt="LinkedIn" className="w-8 h-8" />
+                  <span className="text-lg">LinkedIn</span>
+                </a>
+
+                {/* My Gmail */}
+                <div className="inline-flex items-center space-x-2 w-auto cursor-pointer" onClick={handleCopy}>
+                  <img src={hasCopied ? '/assets/tick.svg' : '/assets/copy.svg'} alt="copy" className="w-8 h-8" />
+                  <span className="text-lg">My Gmail</span>
+                </div>
+
+                {/* GitHub */}
+                <a href="https://github.com/AwaisCoder" target="_blank" rel="noopener noreferrer" className="inline-flex items-center space-x-2 w-auto">
+                  <img src="/assets/github.png" alt="GitHub" className="w-8 h-8" />
+                  <span className="text-lg">GitHub</span>
+                </a>
+
+                {/* Dev.to */}
+                <a href="https://dev.to/awaisz99" target="_blank" rel="noopener noreferrer" className="inline-flex items-center space-x-2 w-auto">
+                  <img src="/assets/devto.png" alt="Dev.to" className="w-8 h-8" />
+                  <span className="text-lg">Dev.to</span>
+                </a>
+
+                {/* Instagram */}
+                <a href="https://instagram.com/_awais.04" target="_blank" rel="noopener noreferrer" className="inline-flex items-center space-x-2 w-auto">
+                  <img src="/assets/insta.png" alt="Instagram" className="w-8 h-8" />
+                  <span className="text-lg">Instagram</span>
+                </a>
+
+                {/* Twitter */}
+                <a href="https://x.com/awaisc004" target="_blank" rel="noopener noreferrer" className="inline-flex items-center space-x-2 w-auto">
+                  <img src="/assets/x.png" alt="Twitter" className="w-8 h-8" />
+                  <span className="text-lg">Twitter</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Theme Switch Card - Moved to Box 2 */}
+        <div className="xl:col-span-1 md:col-span-1 col-span-1 xl:row-span-1 md:row-span-1 row-span-1">
+          <div className="grid-container flex items-center justify-center h-full">
+            <div className="flex items-center space-x-2">
+              <ThemeSwitch isDarkMode={!isDarkMode} toggleTheme={toggleTheme} />
+            </div>
+          </div>
+        </div>
+
+
       </div>
-    </section>
+    </section >
+
   );
 };
 
