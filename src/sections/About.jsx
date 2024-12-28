@@ -85,7 +85,7 @@ const About = () => {
           <div className="grid-container flex flex-col justify-end h-full"> {/* Added justify-end and h-full */}
             <div className="relative flex items-center justify-center text-center"> {/* Added relative here only for z-index context */}
               <div
-                className="w-full sm:h-[390px] h-fit object-cover"
+                className="w-full sm:h-[380px] h-fit object-cover"
                 style={{
                   maskImage: 'linear-gradient(to bottom, black, transparent)',
                   WebkitMaskImage: 'linear-gradient(to bottom, black, transparent)',
@@ -104,12 +104,12 @@ const About = () => {
                 style={{ paddingTop: '50px', zIndex: 10 }} // Adjust padding as needed and ensure zIndex is higher
               >
                 <p className="text-sm sm:text-xs" style={{ fontFamily: 'SF Pro' }}>{formatDate(currentTime)}</p>
-                <p className="text-6xl sm:text-3xl font-bold" style={{ fontFamily: 'SF Pro Rounded' }}>{formatTime(currentTime)}</p> {/* Adjusted font size for medium screens */}
+                <p className="text-5xl font-bold" style={{ fontFamily: 'SF Pro Rounded' }}>{formatTime(currentTime)}</p> {/* Adjusted font size for medium screens */}
                 <p className="text-sm sm:text-xs" style={{ fontFamily: 'SF Pro' }}>{localTimeOffset}</p>
                 <img
                   src="assets/Widgets.png" // Replace with the correct path to your widgets PNG
                   alt="iOS Widgets"
-                  className="w-[190px] h-auto mt-5 sm:w-[100px]" // Adjust size and spacing as needed
+                  className="w-[175px] h-auto mt-5" // Adjust size and spacing as needed
                 />
               </div>
             </div>
