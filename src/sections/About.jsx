@@ -53,7 +53,6 @@ const About = () => {
     <section className="c-space my-20" id="about">
       <div className="grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 h-full grid-rows-[auto,auto,auto,auto,auto]">
 
-
         {/* Large Introduction Card */}
         <div className="xl:col-span-2 md:col-span-1 col-span-1 xl:row-span-2 md:row-span-2 row-span-1">
           <div className="grid-container">
@@ -82,30 +81,35 @@ const About = () => {
         </div>
 
         {/* Time Display */}
-        <div className="xl:col-span-1 md:col-span-1 col-span-1 xl:row-span-3 md:row-span-1 row-span-1">
-          <div className="grid-container flex items-center justify-center h-full">
-            <div className="relative w-full h-full max-w-[500px] max-h-[500px]">
-              <img
-                src="assets/iphone.png"
-                alt="iPhone Lockscreen"
-                className="absolute inset-0 w-full h-full object-cover"
+        <div className="xl:col-span-1 md:col-span-1 col-span-1 xl:row-span-3 md:row-span-1 row-span-1 sm:row-span-1"> {/* Adjusted row span for small screens */}
+          <div className="grid-container flex flex-col justify-end h-full"> {/* Added justify-end and h-full */}
+            <div className="relative flex items-center justify-center text-center"> {/* Added relative here only for z-index context */}
+              <div
+                className="w-full sm:h-[390px] h-fit object-cover"
                 style={{
-                  top: '27px',
-                  maskImage: 'linear-gradient(to right, transparent 1%, black 13%, transparent 100%)',
-                  WebkitMaskImage: 'linear-gradient(to right, transparent 1%, black 50%, transparent 100%)', // For Safari
+                  maskImage: 'linear-gradient(to bottom, black, transparent)',
+                  WebkitMaskImage: 'linear-gradient(to bottom, black, transparent)',
+                  maskMode: 'alpha',
+                  WebkitMaskMode: 'alpha',
                 }}
-              />
+              >
+                <img
+                  src="assets/iphone.png"
+                  alt="iPhone Lockscreen"
+                  className="w-full h-full object-cover"
+                />
+              </div>
               <div
                 className="absolute inset-0 flex flex-col items-center justify-center text-[#C0C0C0] text-center"
-                style={{ paddingTop: '85px' }} // Adjust padding as needed
+                style={{ paddingTop: '50px', zIndex: 10 }} // Adjust padding as needed and ensure zIndex is higher
               >
-                <p className="text-sm" style={{ fontFamily: 'SF Pro' }}>{formatDate(currentTime)}</p>
-                <p className="text-5xl font-bold" style={{ fontFamily: 'SF Pro Rounded' }}>{formatTime(currentTime)}</p>
-                <p className="text-sm" style={{ fontFamily: 'SF Pro' }}>{localTimeOffset}</p>
+                <p className="text-sm sm:text-xs" style={{ fontFamily: 'SF Pro' }}>{formatDate(currentTime)}</p>
+                <p className="text-6xl font-bold" style={{ fontFamily: 'SF Pro Rounded' }}>{formatTime(currentTime)}</p> {/* Adjusted font size for medium screens */}
+                <p className="text-sm sm:text-xs" style={{ fontFamily: 'SF Pro' }}>{localTimeOffset}</p>
                 <img
                   src="assets/Widgets.png" // Replace with the correct path to your widgets PNG
                   alt="iOS Widgets"
-                  className="w-[170px] h-auto mt-4" // Adjust size and spacing as needed
+                  className="w-[190px] h-auto mt-5" // Adjust size and spacing as needed
                 />
               </div>
             </div>
@@ -178,7 +182,6 @@ const About = () => {
             </div>
           </div>
         </div>
-
 
       </div>
     </section >
