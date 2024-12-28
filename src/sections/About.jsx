@@ -109,7 +109,7 @@ const About = () => {
                 <img
                   src="assets/Widgets.png" // Replace with the correct path to your widgets PNG
                   alt="iOS Widgets"
-                  className="w-[175px] h-auto mt-5" // Adjust size and spacing as needed
+                  className="w-[170px] h-auto mt-5" // Adjust size and spacing as needed
                 />
               </div>
             </div>
