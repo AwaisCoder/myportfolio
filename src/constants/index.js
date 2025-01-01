@@ -78,7 +78,7 @@ export const myProjects = [
     desc: 'Snyppit is a feature-rich code editor and runner, built with React, Next.js, and Monaco Editor. It provides a seamless environment for writing, testing, and executing code in multiple languages, complete with customizable themes, language-specific settings, and real-time output.',
     subdesc:
       'Built with React, Next.js, TypeScript, and Monaco Editor, Snyppit is a code editor and runner that leverages Zustand for state management and integrates a serverless API for seamless code execution.',
-    href: '.',
+    href: 'https://snyppit-beta.vercel.app/',
     texture: '/textures/project/snyppit.mp4',
     logo: '/assets/logo2.png',
     logoStyle: {

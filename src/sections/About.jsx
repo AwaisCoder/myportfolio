@@ -85,7 +85,7 @@ const About = () => {
           <div className="grid-container flex flex-col justify-end h-full"> {/* Added justify-end and h-full */}
             <div className="relative flex items-center justify-center text-center"> {/* Added relative here only for z-index context */}
               <div
-                className="w-full sm:h-[380px] h-fit object-cover"
+                className="w-auto sm:h-[380px] h-fit object-cover"
                 style={{
                   maskImage: 'linear-gradient(to bottom, black, transparent)',
                   WebkitMaskImage: 'linear-gradient(to bottom, black, transparent)',
